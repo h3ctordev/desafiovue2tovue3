@@ -1,26 +1,75 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <b-container>
+      <h2 class="my-5 text-center">Desafio Formulario - Héctor Bustos</h2>
+      <v-form :fields="fields" :values="values" @send-form="onSendForm" />
+      <v-data-table :fields="fields" :items="items" />
+    </b-container>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { ref } from 'vue';
+import fieldList from '@/db/fields';
+import VForm from '@/components/VForm.vue';
+import VDataTable from '@/components/VDataTable.vue';
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    VForm,
+    VDataTable,
+  },
+  setup() {
+    console.log(fieldList);
+    const items = ref([]);
+    const values = ref({
+      firstname: '',
+      lastname: '',
+      dob: '',
+      email: '',
+      password: '',
+    });
+    const fields = ref(fieldList);
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+    const onSendForm = (value) => {
+      items.value.push({ ...value });
+      values.value = {
+        firstname: '',
+        lastname: '',
+        dob: '',
+        email: '',
+        password: '',
+      };
+    };
+
+    return {
+      items,
+      values,
+      onSendForm,
+      fields,
+    };
+  },
+  // data() {
+  //   return {
+  //     items: [],
+  //     values: {
+  //       firstname: '',
+  //       lastname: '',
+  //       dob: '',
+  //       email: '',
+  //       password: '',
+  //     },
+  //   };
+  // },
+  // methods: {
+  //   onSendForm(value) {
+  //     this.items.push({ ...value });
+  //     this.values = {
+  //       firstname: '',
+  //       lastname: '',
+  //       years: '',
+  //     };
+  //   },
+  // },
+};
+</script>
