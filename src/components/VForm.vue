@@ -20,7 +20,10 @@
               :type="field.type || 'text'"
               :key="$index"
             ></Field>
-            <ErrorMessage :name="field.key" />
+            <ErrorMessage
+              class="text-danger font-weight-bold"
+              :name="field.key"
+            />
           </div>
           <b-col class="text-center">
             <button class="mt-4 btn btn-primary" type="submit">Enviar</button>
