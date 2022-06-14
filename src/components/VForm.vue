@@ -3,7 +3,7 @@
     <b-row align-h="center">
       <b-col cols="9">
         <Form @submit="onSubmit" :validation-schema="schema">
-          <div v-for="(field, $index) in fields" :key="$index">
+          <div class="mb-3" v-for="(field, $index) in fields" :key="$index">
             <label>
               {{ field.label }}
               <span
